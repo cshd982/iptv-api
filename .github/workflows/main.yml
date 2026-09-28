@@ -12,6 +12,8 @@ jobs:
   push:
     runs-on: ubuntu-latest
     timeout-minutes: 120
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v3
         with:
@@ -32,7 +34,8 @@ jobs:
       - name: Install dependencies
         run: |
           pipenv --python 3.13
-          pipenv install 
+          pipenv install
+
       - name: Run update
         run: pipenv run dev
 
@@ -40,14 +43,13 @@ jobs:
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          FINAL=$(python -c 'from utils.config import config; print(config.final_file)')
-          FINAL_M3U="${FINAL%.*}.m3u"
-          [ -f "$FINAL" ] && git add -f "$FINAL"
-          [ -f "$FINAL_M3U" ] && git add -f "$FINAL_M3U"
+          git add -f output/user_result.txt output/user_result.m3u 2>/dev/null || true
           if [ -f "output/cache.pkl" ]; then git add -f "output/cache.pkl"; fi
           if ! git diff --staged --quiet; then
             git commit -m "auto update $(date +%F)"
             git push origin master
+          else
+            echo "No changes to commit"
           fi
 
       - name: Push live files to Gitee tvbox repo
@@ -55,22 +57,16 @@ jobs:
           GITEE_TOKEN: ${{ secrets.GITEE_TOKEN }}
         run: |
           set -e
-          FINAL=$(python -c 'from utils.config import config; print(config.final_file)')
-          FINAL_M3U="${FINAL%.*}.m3u"
-
-          if [ ! -f "$FINAL" ] && [ ! -f "$FINAL_M3U" ]; then
+          if [ ! -f "output/user_result.txt" ] && [ ! -f "output/user_result.m3u" ]; then
             echo "No result files, skip Gitee push"
             exit 0
           fi
-
           git clone --depth 1 https://oauth2:${GITEE_TOKEN}@gitee.com/cshd982/tvbox.git /tmp/tvbox
           cd /tmp/tvbox
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git config user.name "github-actions[bot]"
-
-          [ -f "$GITHUB_WORKSPACE/$FINAL" ] && cp "$GITHUB_WORKSPACE/$FINAL" ./live.txt
-          [ -f "$GITHUB_WORKSPACE/$FINAL_M3U" ] && cp "$GITHUB_WORKSPACE/$FINAL_M3U" ./live.m3u
-
+          [ -f "$GITHUB_WORKSPACE/output/user_result.txt" ] && cp "$GITHUB_WORKSPACE/output/user_result.txt" ./live.txt
+          [ -f "$GITHUB_WORKSPACE/output/user_result.m3u" ] && cp "$GITHUB_WORKSPACE/output/user_result.m3u" ./live.m3u
           git add -f live.txt live.m3u
           if ! git diff --staged --quiet; then
             git commit -m "auto update $(date +%F)"
