@@ -32,8 +32,7 @@ jobs:
       - name: Install dependencies
         run: |
           pipenv --python 3.13
-          pipenv install --deploy
-
+          pipenv install 
       - name: Run update
         run: pipenv run dev
 
