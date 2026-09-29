@@ -5,9 +5,8 @@ on:
     - cron: '0 22 * * *'
     - cron: '0 10 * * *'
   workflow_dispatch:
-分支:
+    branches:
       - master
-
 jobs:
   push:
     runs-on: ubuntu-latest
