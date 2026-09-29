@@ -5,7 +5,7 @@ on:
     - cron: '0 22 * * *'
     - cron: '0 10 * * *'
   workflow_dispatch:
-    branches:
+分支:
       - master
 
 jobs:
@@ -50,28 +50,4 @@ jobs:
             git push origin master
           else
             echo "No changes to commit"
-          fi
-
-      - name: Push live files to Gitee tvbox repo
-        env:
-          GITEE_TOKEN: ${{ secrets.GITEE_TOKEN }}
-        run: |
-          set -e
-          if [ ! -f "output/user_result.txt" ] && [ ! -f "output/user_result.m3u" ]; then
-            echo "No result files, skip Gitee push"
-            exit 0
-          fi
-          git clone --depth 1 https://oauth2:${GITEE_TOKEN}@gitee.com/cshd982/tvbox.git /tmp/tvbox
-          cd /tmp/tvbox
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git config user.name "github-actions[bot]"
-          [ -f "$GITHUB_WORKSPACE/output/user_result.txt" ] && cp "$GITHUB_WORKSPACE/output/user_result.txt" ./live.txt
-          [ -f "$GITHUB_WORKSPACE/output/user_result.m3u" ] && cp "$GITHUB_WORKSPACE/output/user_result.m3u" ./live.m3u
-          git add -f live.txt live.m3u
-          if ! git diff --staged --quiet; then
-            git commit -m "auto update $(date +%F)"
-            git push origin master
-            echo "Pushed live.txt and live.m3u to gitee.com/cshd982/tvbox"
-          else
-            echo "No content change, skip Gitee push"
           fi
