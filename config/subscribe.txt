@@ -12,3 +12,9 @@ https://gh-proxy.org/https://raw.githubusercontent.com/joevess/IPTV/main/home.m3
 
 # 另一个社区源
 https://gh-proxy.org/https://raw.githubusercontent.com/YueChan/Live/main/IPTV.m3u
+
+# Global直播源
+https://live.fanmingming.com/tv/m3u/global.m3u
+
+# IPTV(IPV6)
+https://live.fanmingming.com/tv/m3u/ipv6.m3u
