@@ -4,3 +4,16 @@
 # The local source list, one line per source, format: channel name, interface address
 # Support setting whitelist: add $! after the interface
 # If there are multiple local source files, you can create a local directory under the config directory for storage, supporting txt/m3u file formats
+
+🏔️山东地方台,#genre#
+
+# 山东广电官方公网源（齐鲁网）
+山东齐鲁,http://livealone302.iqilu.com/iqilu/qlpd.m3u8
+山东体育,http://livealone302.iqilu.com/iqilu/typd.m3u8
+
+# 烟台电视台官方源
+烟台影视,http://live.yantaitv.cn/live/e9f1d9045d...
+
+# 其他公网源
+山东新闻,https://epg.pw/stream/4aae1867c511...
+山东综艺,https://epg.pw/stream/8ffae393d0cdcc6bb4c0df9d445fd2a995df30bfa31054615b67101ca3ad76a2.m3u8
