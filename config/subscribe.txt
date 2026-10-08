@@ -33,3 +33,6 @@ https://itv.aptv.app/china-iptv/sxyd.m3u
 
 # IPTV-org
 https://iptv-org.github.io/iptv/countries/cn.m3u
+
+#自己的直播源
+https://gh-proxy.org/https://github.com/cshd982/tvbox-api-backup/blob/main/tvbox/live/Guovin.m3u
