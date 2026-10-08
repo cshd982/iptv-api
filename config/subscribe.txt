@@ -30,3 +30,6 @@ http://raw.githubusercontent.com/bigtaoge/hellotv/main/sdtvlist.txt
 
 # 山东移动 IPTV
 https://itv.aptv.app/china-iptv/sxyd.m3u
+
+# IPTV-org
+https://iptv-org.github.io/iptv/countries/cn.m3u
