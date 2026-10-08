@@ -6,6 +6,54 @@
 # If the channel name is not filled in, the address will be added to the results of all channels, with multiple records entered on new lines.
 
 
+山东齐鲁
+山东生活
+山东新闻
+山东文旅
+山东综艺
+山东农科
+山东少儿
+山东体育
+济南新闻综合
+济南都市
+济南生活
+青岛TV1
+青岛TV2
+青岛TV3
+青岛TV4
+烟台新闻综合
+烟台公共
+烟台经济科技
+烟台影视
+潍坊TV1
+潍坊TV2
+临沂综合
+临沂公共
+临沂经济
+淄博新闻
+淄博都市
+淄博生活
+淄博科教
+德州新闻综合
+德州公共
+滨州新闻综合
+滨州公共
+东营新闻综合
+东营公共
+济宁综合
+济宁公共
+泰安综合
+泰安公共
+威海新闻综合1
+威海公共2
+日照新闻综合
+日照科教
+聊城综合
+聊城公共
+菏泽TV1
+菏泽TV2
+枣庄新闻综合
+枣庄经济生活
 
 
 
