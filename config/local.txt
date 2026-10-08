@@ -10,10 +10,15 @@
 # 山东广电官方公网源（齐鲁网）
 山东齐鲁,http://livealone302.iqilu.com/iqilu/qlpd.m3u8
 山东体育,http://livealone302.iqilu.com/iqilu/typd.m3u8
+山东生活,http://livealone302.iqilu.com/iqilu/shpd.m3u8
+山东农科,http://livealone302.iqilu.com/iqilu/nkpd.m3u8
+山东少儿,http://livealone302.iqilu.com/iqilu/sepd.m3u8
+山东综艺,http://livealone302.iqilu.com/iqilu/zypd.m3u8
 
-# 烟台电视台官方源
-烟台影视,http://live.yantaitv.cn/live/e9f1d9045d...
-
-# 其他公网源
-山东新闻,https://epg.pw/stream/4aae1867c511...
-山东综艺,https://epg.pw/stream/8ffae393d0cdcc6bb4c0df9d445fd2a995df30bfa31054615b67101ca3ad76a2.m3u8
+# 青岛电视台官方源
+青岛TV1,http://video10.qtv.com.cn/drm/qtv1at/manifest.m3u8
+青岛TV2,http://video10.qtv.com.cn/drm/qtv2at/manifest.m3u8
+青岛TV3,http://video10.qtv.com.cn/drm/qtv3at/manifest.m3u8
+青岛TV4,http://video10.qtv.com.cn/drm/qtv4at/manifest.m3u8
+青岛TV5,http://video10.qtv.com.cn/drm/qtv5at/manifest.m3u8
+青岛TV6,http://video10.qtv.com.cn/drm/qtv6at/manifest.m3u8
