@@ -25,3 +25,8 @@ https://gh.jjj.gv.uy/https://raw.githubusercontent.com/imDazui/Tvlist-awesome-m3
 # 国内电视台直播源m3u8（IPV6）下载地址
 https://gh.jjj.gv.uy/https://raw.githubusercontent.com/imDazui/Tvlist-awesome-m3u-m3u8/master/m3u/%E7%A7%BB%E5%8A%A8IPV6IPTV%E7%9B%B4%E6%92%AD%E6%BA%90.m3u
 
+# 山东地方台合集（最全）
+http://raw.githubusercontent.com/bigtaoge/hellotv/main/sdtvlist.txt
+
+# 山东移动 IPTV
+https://itv.aptv.app/china-iptv/sxyd.m3u
