@@ -5,3 +5,6 @@ https://gitlab.com/Meroser/My-EPG/-/raw/main/tvxml-Meroser.xml.gz
 https://raw.githubusercontent.com/Meroser/EPG-test/refs/heads/main/tvxml-Meroser.xml.gz
 https://gitlab.com/Meroser/My-EPG/-/raw/main/tvxml.xml.gz
 https://raw.githubusercontent.com/Meroser/EPG-test/refs/heads/main/tvxml.xml.gz
+https://epg.112114.xyz/pp.xml
+https://live.fanmingming.com/e.xml
+https://live.fanmingming.cn/e.xml
