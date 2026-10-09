@@ -36,3 +36,13 @@ https://iptv-org.github.io/iptv/countries/cn.m3u
 
 #自己的直播源
 https://gh-proxy.org/https://github.com/cshd982/tvbox-api-backup/blob/main/tvbox/live/Guovin.m3u
+
+# suxuang
+https://gh-proxy.org/raw.githubusercontent.com/suxuang/myIPTV/main/ipv4.m3u
+
+# BigBigGrandG源
+https://raw.githubusercontent.com/BigBigGrandG/IPTV-URL/release/Gather.m3u
+# Kimentanm源
+https://raw.githubusercontent.com/Kimentanm/aptv/master/m3u/iptv.m3u
+# YanG集合源
+https://raw.githubusercontent.com/YanG-1989/m3u/main/Gather.m3u
