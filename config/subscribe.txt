@@ -46,3 +46,6 @@ https://raw.githubusercontent.com/BigBigGrandG/IPTV-URL/release/Gather.m3u
 https://raw.githubusercontent.com/Kimentanm/aptv/master/m3u/iptv.m3u
 # YanG集合源
 https://raw.githubusercontent.com/YanG-1989/m3u/main/Gather.m3u
+
+# zhao
+https://cdn.jsdelivr.net/gh/zhaozhaozha/iptv-sources@main/vbsky-huya.m3u
