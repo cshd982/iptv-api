@@ -35,6 +35,10 @@ jobs:
           pipenv --python 3.13
           pipenv install
 
+      - name: Generate user_demo.txt (auto scan + classify)
+        run: python scripts/generate_demo.py
+
+
       - name: Run update
         run: pipenv run dev
 
@@ -42,7 +46,7 @@ jobs:
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add -f output/user_result.txt output/user_result.m3u 2>/dev/null || true
+          git add -f output/user_result.txt output/user_result.m3u config/user_demo.txt 2>/dev/null || true
           if [ -f "output/cache.pkl" ]; then git add -f "output/cache.pkl"; fi
           if ! git diff --staged --quiet; then
             git commit -m "auto update $(date +%F)"
