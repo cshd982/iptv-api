@@ -1,51 +1,49 @@
 # 公开订阅源，一行一个 URL
 # 程序会自动拉取这些地址，测速后保留可用的
-
 # 你最初用的那个源
 https://gh-proxy.org/https://raw.githubusercontent.com/jn950/live/main/tv/holive.m3u
-
 # 项目作者维护的公开源
 https://gh-proxy.org/https://raw.githubusercontent.com/Guovin/iptv-api/gd/output/result.m3u
-
 # 社区维护的源
 https://gh-proxy.org/https://raw.githubusercontent.com/joevess/IPTV/main/home.m3u8
-
 # 另一个社区源
 https://gh-proxy.org/https://raw.githubusercontent.com/YueChan/Live/main/IPTV.m3u
-
 # Global直播源
 https://live.fanmingming.com/tv/m3u/global.m3u
-
 # IPTV(IPV6)
 https://live.fanmingming.com/tv/m3u/ipv6.m3u
-
 # 国内电视台直播源m3u8下载地址
 https://gh.jjj.gv.uy/https://raw.githubusercontent.com/imDazui/Tvlist-awesome-m3u-m3u8/master/m3u/%E5%9B%BD%E5%86%85%E7%94%B5%E8%A7%86%E5%8F%B0202509.m3u
-
 # 国内电视台直播源m3u8（IPV6）下载地址
 https://gh.jjj.gv.uy/https://raw.githubusercontent.com/imDazui/Tvlist-awesome-m3u-m3u8/master/m3u/%E7%A7%BB%E5%8A%A8IPV6IPTV%E7%9B%B4%E6%92%AD%E6%BA%90.m3u
-
 # 山东地方台合集（最全）
 http://raw.githubusercontent.com/bigtaoge/hellotv/main/sdtvlist.txt
-
 # 山东移动 IPTV
 https://itv.aptv.app/china-iptv/sxyd.m3u
-
 # IPTV-org
 https://iptv-org.github.io/iptv/countries/cn.m3u
-
 #自己的直播源
 https://gh-proxy.org/https://github.com/cshd982/tvbox-api-backup/blob/main/tvbox/live/Guovin.m3u
-
 # suxuang
 https://gh-proxy.org/raw.githubusercontent.com/suxuang/myIPTV/main/ipv4.m3u
-
 # BigBigGrandG源
 https://raw.githubusercontent.com/BigBigGrandG/IPTV-URL/release/Gather.m3u
 # Kimentanm源
 https://raw.githubusercontent.com/Kimentanm/aptv/master/m3u/iptv.m3u
 # YanG集合源
 https://raw.githubusercontent.com/YanG-1989/m3u/main/Gather.m3u
-
 # zhao
 https://cdn.jsdelivr.net/gh/zhaozhaozha/iptv-sources@main/vbsky-huya.m3u
+# suxuang ipv6（862台，与上面ipv4配套）
+https://gh-proxy.org/https://raw.githubusercontent.com/suxuang/myIPTV/main/ipv6.m3u
+# hujingguang ChinaIPTV（70台）
+https://gh-proxy.org/https://raw.githubusercontent.com/hujingguang/ChinaIPTV/main/cnTV_AutoUpdate.m3u8
+# BurningC4 Chinese-IPTV（58台）
+https://gh-proxy.org/https://raw.githubusercontent.com/BurningC4/Chinese-IPTV/master/TV-IPV4.m3u
+# zwc456baby iptv_alive（30台）
+https://gh-proxy.org/https://raw.githubusercontent.com/zwc456baby/iptv_alive/refs/heads/master/live.m3u
+# ibert fmml_ipv6（82台，直连无需代理）
+https://m3u.ibert.me/fmml_ipv6.m3u
+
+
+
