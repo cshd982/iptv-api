@@ -34,6 +34,7 @@ https://raw.githubusercontent.com/Kimentanm/aptv/master/m3u/iptv.m3u
 https://raw.githubusercontent.com/YanG-1989/m3u/main/Gather.m3u
 # zhao
 https://cdn.jsdelivr.net/gh/zhaozhaozha/iptv-sources@main/vbsky-huya.m3u
+# ===== 2026-10-10 新增（实测可用的直播源）=====
 # suxuang ipv6（862台，与上面ipv4配套）
 https://gh-proxy.org/https://raw.githubusercontent.com/suxuang/myIPTV/main/ipv6.m3u
 # hujingguang ChinaIPTV（70台）
@@ -44,6 +45,12 @@ https://gh-proxy.org/https://raw.githubusercontent.com/BurningC4/Chinese-IPTV/ma
 https://gh-proxy.org/https://raw.githubusercontent.com/zwc456baby/iptv_alive/refs/heads/master/live.m3u
 # ibert fmml_ipv6（82台，直连无需代理）
 https://m3u.ibert.me/fmml_ipv6.m3u
+# bbxx365 全量源（最全，带黑白名单自动过滤）
+https://gh-proxy.org/https://raw.githubusercontent.com/kimwang1978/collect-txt/main/bbxx365.m3u
+# bbxx365 精简版
+https://gh-proxy.org/https://raw.githubusercontent.com/kimwang1978/collect-txt/main/bbxx365_lite.m3u
+
+
 
 
 
