@@ -49,8 +49,8 @@ https://m3u.ibert.me/fmml_ipv6.m3u
 https://gh-proxy.org/https://raw.githubusercontent.com/kimwang1978/collect-txt/main/bbxx365.m3u
 # bbxx365 精简版
 https://gh-proxy.org/https://raw.githubusercontent.com/kimwang1978/collect-txt/main/bbxx365_lite.m3u
-
-
-
-
+# zilong
+https://raw.githubusercontent.com/zilong7728/Collect-IPTV/refs/heads/main/best_sorted.m3u
+# 上海移动
+https://github.com/xisohi/CHINA-IPTV/blob/main/Unicast/shanghai/mobile.txt
 
