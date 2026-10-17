@@ -24,6 +24,10 @@ https://itv.aptv.app/china-iptv/sxyd.m3u
 https://iptv-org.github.io/iptv/countries/cn.m3u
 #自己的直播源
 https://gh-proxy.org/https://github.com/cshd982/tvbox-api-backup/blob/main/tvbox/live/Guovin.m3u
+https://gh-proxy.org/https://github.com/cshd982/tvbox-api-backup/blob/main/tvbox/live/Kimentanm.m3u
+https://gh-proxy.org/https://github.com/cshd982/tvbox-api-backup/blob/main/tvbox/live/Yoursmile.txt
+https://gh-proxy.org/https://github.com/cshd982/tvbox-api-backup/blob/main/tvbox/live/综合直播.php
+https://gh-proxy.org/https://github.com/cshd982/tvbox-api-backup/blob/main/tvbox/live/范明明需开启V6网络.m3u
 # suxuang
 https://gh-proxy.org/raw.githubusercontent.com/suxuang/myIPTV/main/ipv4.m3u
 # BigBigGrandG源
