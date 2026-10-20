@@ -53,6 +53,8 @@ jobs:
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add -f output/user_result.txt output/user_result.m3u config/user_demo.txt 2>/dev/null || true
+          if [ -f "output/epg/epg.xml" ]; then git add -f "output/epg/epg.xml"; fi
+          if [ -f "output/epg/epg.gz" ]; then git add -f "output/epg/epg.gz"; fi
           if [ -f "output/cache.pkl" ]; then git add -f "output/cache.pkl"; fi
           if git diff --staged --quiet; then
             echo "No changes to commit"
