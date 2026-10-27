@@ -35,7 +35,7 @@ jobs:
         run: python scripts/generate_demo.py
       - name: Run update
         run: pipenv run dev
-           - name: Point EPG url to GitLink EPG
+      - name: Point EPG url to GitLink EPG
         run: |
           # iptv-api 生成的 m3u 头部 EPG 指向本仓库 output/epg.gz。为确保播放器在国内
           # 稳定拉到节目单，这里把 x-tvg-url 替换为 GitLink 直链（已由 tvbox-ysc-config
@@ -52,10 +52,7 @@ jobs:
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add -f output/user_result.txt output/user_result.m3u config/user_demo.txt 2>/dev/null || true
-          if [ -f "output/epg/epg.xml" ]; then git add -f "output/epg/epg.xml"; fi
-          if [ -f "output/epg/epg.gz" ]; then git add -f "output/epg/epg.gz"; fi
-          if [ -f "output/cache.pkl" ]; then git add -f "output/cache.pkl"; fi
+          git add -A output config 2>/dev/null || true
           if git diff --staged --quiet; then
             echo "No changes to commit"
           else
