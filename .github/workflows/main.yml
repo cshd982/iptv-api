@@ -1,0 +1,63 @@
+name: 'Update schedule'
+on:
+  schedule:
+    - cron: '0 18 * * *'
+  workflow_dispatch:
+    branches:
+      - master
+concurrency:
+  group: update-schedule
+  cancel-in-progress: false
+jobs:
+  push:
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: master
+      - name: Set up Python 3.13
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.13'
+          cache: 'pipenv'
+      - name: Install FFmpeg
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+      - name: Install pipenv
+        run: pip3 install --user pipenv
+      - name: Install dependencies
+        run: |
+          pipenv --python 3.13
+          pipenv install
+      - name: Generate user_demo.txt (auto scan + classify)
+        run: python scripts/generate_demo.py
+      - name: Run update
+        run: pipenv run dev
+      - name: Point EPG url to GitLink EPG
+        run: |
+          # iptv-api 生成的 m3u 头部 EPG 指向本仓库 output/epg.gz。为确保播放器在国内
+          # 稳定拉到节目单，这里把 x-tvg-url 替换为 GitLink 直链（已由 tvbox-ysc-config
+          # 的 auto-push 推送）。频道 tv-id 已由工具写好，能对上就有节目单。
+          EPG_URL="https://cdn09022024.gitlink.org.cn/api/v1/repos/cshd982/data/raw/master/epg.xml"
+          for f in output/user_result.m3u output/live.m3u; do
+            if [ -f "$f" ]; then
+              sed -i "s|x-tvg-url=\"[^\"]*\"|x-tvg-url=\"$EPG_URL\"|" "$f" || true
+              echo "已更新 $f 的 EPG 地址为 $EPG_URL"
+            fi
+          done
+
+      - name: Commit result to this repo
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add -A output config 2>/dev/null || true
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "auto update $(date +%F)"
+            # 先合并远程最新提交，再推送，避免两个任务并发抢推被拒绝
+            git pull --rebase origin master || true
+            git push origin master || { git pull --rebase origin master && git push origin master; }
+          fi

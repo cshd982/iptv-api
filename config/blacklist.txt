@@ -1,0 +1,11 @@
+# 这是接口黑名单列表，符合关键字的接口将被拦截，一个关键字一行
+# This is the interface blacklist list, the interface matching the keyword will be blocked, one keyword line
+/audio/
+bxtv.3a.ink
+收音
+广播
+电台
+Radio
+抢购热线
+电视购物
+双鹿通

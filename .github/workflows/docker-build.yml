@@ -1,0 +1,62 @@
+name: Build and Push Docker Images
+
+on:
+  workflow_dispatch:
+    branches:
+      - master
+
+jobs:
+  test:
+    uses: ./.github/workflows/tests.yml
+
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Get version and build time
+        run: |
+          $path = 'version.json'
+          if (-not (Test-Path -Path $path)) {
+            Write-Error 'version.json not found.'
+            exit 1
+          }
+          $data = Get-Content $path | ConvertFrom-Json
+          $version = $data.version
+          if (-not $version) { $version = 'unknown' }
+          try {
+            $tz = [System.TimeZoneInfo]::FindSystemTimeZoneById('Asia/Shanghai')
+            $build_time = [System.TimeZoneInfo]::ConvertTimeFromUtc((Get-Date).ToUniversalTime(), $tz).ToString('yyyy-MM-dd HH:mm:ss')
+          } catch {
+            $build_time = (Get-Date).ToUniversalTime().AddHours(8).ToString('yyyy-MM-dd HH:mm:ss')
+          }
+          $data.build_time = $build_time
+          $data | ConvertTo-Json -Depth 10 | Set-Content $path
+          echo "version=$version" >> $env:GITHUB_ENV
+          echo "build_time=$build_time" >> $env:GITHUB_ENV
+        shell: pwsh
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          push: true
+          tags: |
+            guovern/iptv-api:latest
+            guovern/iptv-api:${{ env.version }}
+          platforms: linux/amd64,linux/arm64,linux/arm/v7

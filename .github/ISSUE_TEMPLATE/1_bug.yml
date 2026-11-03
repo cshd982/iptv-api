@@ -1,0 +1,121 @@
+name: Bug report | 报告运行错误或异常
+description: Report a reproducible error or unexpected behavior | 提交可复现的错误或异常行为
+labels:
+  - bug
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢你帮助改进项目。
+
+        请不要在 Issue 中粘贴密码、Token、Cookie、私有地址或其他敏感信息。
+        日志和配置内容请先脱敏。
+
+        Thanks for helping improve this project.
+
+        Please remove passwords, tokens, cookies, private URLs, and other sensitive information before submitting logs or configuration.
+
+  - type: checkboxes
+    id: precheck
+    attributes:
+      label: Submission checklist | 提交前确认
+      description: Please confirm the following before submitting | 提交前请确认以下内容
+      options:
+        - label: I have searched existing issues and found no duplicate | 我已经搜索过现有 Issue，确认不是重复问题
+          required: true
+        - label: This is a runtime error or unexpected behavior, not a feature request | 这是运行错误或异常行为，不是功能建议
+          required: true
+        - label: I have removed sensitive information from logs and configuration | 我已经从日志和配置中移除了敏感信息
+          required: true
+
+  - type: dropdown
+    id: usage_context
+    attributes:
+      label: Usage context | 使用场景
+      description: Select all environments where the problem occurs | 选择出现问题的运行环境
+      multiple: true
+      options:
+        - GUI | 软件界面
+        - Command line | 命令行
+        - Docker
+        - GitHub Actions / Workflow | GitHub 工作流
+        - API
+        - Other | 其他
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Version or commit | 版本或提交
+      description: Provide the release version, tag, or commit ID | 填写版本号、Tag 或 Commit ID
+      placeholder: "例如：v1.2.3 或 8f31abc"
+    validations:
+      required: true
+
+  - type: input
+    id: operating_system
+    attributes:
+      label: Operating system and architecture | 操作系统与架构
+      description: Include the operating system and CPU architecture if relevant | 如有需要，请填写操作系统和 CPU 架构
+      placeholder: "例如：Ubuntu 24.04 x86_64、Windows 11、macOS ARM64"
+    validations:
+      required: true
+
+  - type: textarea
+    id: what_happened
+    attributes:
+      label: What happened? | 发生了什么
+      description: Describe the actual behavior and the error message | 描述实际行为和错误信息
+      placeholder: 请尽量具体描述发生了什么，以及问题出现的时间和频率
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction_steps
+    attributes:
+      label: Steps to reproduce | 复现步骤
+      description: List the smallest possible steps to reproduce the problem | 请列出能够复现问题的最简步骤
+      placeholder: |
+        1. ...
+        2. ...
+        3. ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected_behavior
+    attributes:
+      label: Expected behavior | 期望行为
+      description: Describe what you expected to happen | 描述你原本期望发生的结果
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs and error output | 日志与报错信息
+      description: Paste the relevant logs. Do not use screenshots when text can be copied. | 粘贴相关日志；可以复制文本时请不要使用截图
+      placeholder: 粘贴相关日志，并先删除敏感信息
+      render: shell
+    validations:
+      required: false
+
+  - type: textarea
+    id: configuration
+    attributes:
+      label: Relevant configuration | 相关配置
+      description: Paste only the relevant and sanitized configuration | 仅粘贴相关配置，并先删除敏感信息
+      placeholder: 粘贴相关配置，并先删除密码、Token、Cookie 等敏感内容
+      render: ini
+    validations:
+      required: false
+
+  - type: textarea
+    id: additional_context
+    attributes:
+      label: Additional context | 补充信息
+      description: Add screenshots, links, workaround, or any other useful information | 可补充截图、链接、临时解决方法等信息
+    validations:
+      required: false
