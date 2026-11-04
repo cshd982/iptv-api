@@ -15,6 +15,16 @@
 山东少儿,http://livealone302.iqilu.com/iqilu/sepd.m3u8
 山东综艺,http://livealone302.iqilu.com/iqilu/zypd.m3u8
 
+# 山东IPTV公开源（2026-11 实测可用）
+# 影视频道已于2021年更名为文旅频道，CHANNEL00000337 即该频道
+山东齐鲁,http://223.99.189.25:8089/shandong_cabletv.live.zte.com/223.99.253.7:8081/00/SNM/CHANNEL00000313/index.m3u8
+山东综艺,http://223.99.189.25:8089/shandong_cabletv.live.zte.com/223.99.253.7:8081/00/SNM/CHANNEL00000338/index.m3u8
+山东影视频道,http://223.99.189.25:8089/shandong_cabletv.live.zte.com/223.99.253.7:8081/00/SNM/CHANNEL00000337/index.m3u8
+山东体育休闲频道,http://223.99.189.25:8089/shandong_cabletv.live.zte.com/223.99.253.7:8081/00/SNM/CHANNEL00000315/index.m3u8
+山东农科,http://223.99.189.25:8089/shandong_cabletv.live.zte.com/223.99.253.7:8081/00/SNM/CHANNEL00000339/index.m3u8
+山东新闻,http://223.99.189.25:8089/shandong_cabletv.live.zte.com/223.99.253.7:8081/00/SNM/CHANNEL00000314/index.m3u8
+济南新闻综合,http://ucdn.sd.chinamobile.com:8089/00/SNM/CHANNEL00000061/index.m3u8
+
 # 青岛电视台官方源
 青岛TV1,http://video10.qtv.com.cn/drm/qtv1at/manifest.m3u8
 青岛TV2,http://video10.qtv.com.cn/drm/qtv2at/manifest.m3u8
@@ -32,3 +42,8 @@
 山东农科,rtmp://livealone.iqilu.com/iqilu/nkpdhjOF03kn
 山东文旅,rtmp://livealone.iqilu.com/iqilu/yspdhjOF03kn
 山东少儿,rtmp://livealone.iqilu.com/iqilu/sepdhjOF03kn
+
+# 湖北/黑龙江地方台官方源（2026-11 实测，海外节点可访问，不依赖省内网络）
+荆门新闻综合,http://stream.jmtv.com.cn/xwzh/sd/live.m3u8
+哈尔滨新闻综合,http://stream.hrbtv.net/xwzh/sd/live.m3u8
+七台河新闻综合,http://live.qthnews.org.cn:1935/live/live1/800k/tzwj_video.m3u8

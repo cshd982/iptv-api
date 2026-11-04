@@ -15,6 +15,8 @@ import urllib.request
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SUBSCRIBE = os.path.join(ROOT, "config", "subscribe.txt")
 OUT = os.path.join(ROOT, "config", "user_demo.txt")
+# 手工补充频道文件：定时任务每次全量重写 user_demo.txt，手工频道写在该文件中可长期保留
+EXTRA = os.path.join(ROOT, "config", "user_demo_extra.txt")
 UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/120"
 
 NOISE_GROUPS = re.compile(r"更新时间|专享|电影点播|电视剧|直播回看|回看|预告|相关|源", re.I)
@@ -91,9 +93,39 @@ CITY_MAP = {
     "宁夏": ["石嘴山", "吴忠", "固原", "中卫"],
     "新疆": ["克拉玛依", "吐鲁番", "哈密", "昌吉", "博尔塔拉", "巴音郭楞", "阿克苏", "克孜勒苏", "喀什", "和田", "伊犁", "塔城", "阿勒泰", "石河子", "五家渠", "库尔勒"],
     "重庆": ["江津", "万州", "涪陵", "黔江", "永川", "合川", "南川", "綦江", "长寿", "铜梁", "荣昌", "大足", "开州", "奉节", "巫山", "云阳"],
+    "上海": [],
+    "天津": [],
 }
-CITY_ORDER = ["河北", "山西", "内蒙古", "辽宁", "吉林", "黑龙江", "江苏", "浙江", "安徽", "福建", "江西", "山东", "河南", "湖北", "湖南", "广东", "广西", "海南", "四川", "贵州", "云南", "西藏", "陕西", "甘肃", "青海", "宁夏", "新疆", "重庆"]
-CITY_PAT = {k: re.compile("|".join(CITY_MAP[k])) for k in CITY_MAP}
+CITY_EXTRA = os.path.join(ROOT, "config", "classify_city_extra.txt")
+
+
+def load_city_extra():
+    """合并 config/classify_city_extra.txt 中的县/区归属，避免把地方台硬编码进脚本。"""
+    if not os.path.exists(CITY_EXTRA):
+        return
+    with open(CITY_EXTRA, "r", encoding="utf-8") as f:
+        for raw in f:
+            line = raw.strip()
+            if not line or line.startswith("#") or ":" not in line:
+                continue
+            province, values = line.split(":", 1)
+            province = province.strip()
+            if province not in CITY_MAP:
+                continue
+            for value in values.split(","):
+                value = value.strip()
+                if value and value not in CITY_MAP[province]:
+                    CITY_MAP[province].append(value)
+
+
+load_city_extra()
+CITY_ORDER = ["河北", "山西", "内蒙古", "辽宁", "吉林", "黑龙江", "江苏", "浙江", "安徽", "福建", "江西", "山东", "河南", "湖北", "湖南", "广东", "广西", "海南", "四川", "贵州", "云南", "西藏", "陕西", "甘肃", "青海", "宁夏", "新疆", "上海", "天津", "重庆"]
+CITY_PAT = {k: re.compile("|".join(CITY_MAP[k]) or r"(?!)") for k in CITY_MAP}
+
+
+def is_local_name(name):
+    """频道名含已知地级市/县区关键词，视为地方台：允许只出现一次也保留。"""
+    return any(CITY_PAT[p].search(name) for p in CITY_ORDER)
 
 CAT_MAP = {
     "动画": "🪁动画少儿", "少儿": "🪁动画少儿", "卡通": "🪁动画少儿",
@@ -207,8 +239,19 @@ def get_cat(group, name):
     )
     if INDUSTRY.search(name):
         return "🎯行业频道"
+    # 源站常把外省城市冠上本省前缀（如“河北荆门公共”），以城市归属为准
     for p in PROV_ORDER:
-        if PROV_PAT[p].search(name) or PROV_PAT[p].search(group):
+        if p in ("北京", "上海", "天津", "重庆"):
+            continue
+        if not name.startswith(p):
+            continue
+        rest = name[len(p):]
+        for q in CITY_ORDER:
+            if q != p and CITY_PAT[q].match(rest):
+                return PROV_CAT[q]
+    # 省名优先看频道名，再看订阅源的分组：避免“朝阳新闻综合”被分组误标成湖北
+    for p in PROV_ORDER:
+        if PROV_PAT[p].search(name):
             return PROV_CAT[p]
     # 地级市/地区归属（如"嘉兴新闻综合" -> 浙江；"七台河新闻综合" -> 黑龙江）
     for p in CITY_ORDER:
@@ -217,6 +260,9 @@ def get_cat(group, name):
     for k, v in CAT_MAP.items():
         if k and re.search(k, name):
             return v
+    for p in PROV_ORDER:
+        if PROV_PAT[p].search(group):
+            return PROV_CAT[p]
     return "☘️地方频道"
 
 
@@ -249,6 +295,56 @@ def parse_source(url):
             continue
         pairs.append((name, group))
     return pairs
+
+
+def merge_extra_channels(lines):
+    """把 config/user_demo_extra.txt 的手工频道合并进自动生成结果。
+
+    定时任务每天都全量重建 user_demo.txt，直接改该文件会被覆盖；这里仅做
+    “追加 + 去重”，不改变原有的抓取/分类/冷门过滤逻辑。
+    """
+    if not os.path.exists(EXTRA):
+        return lines
+
+    extra = {}
+    current = None
+    with open(EXTRA, "r", encoding="utf-8") as f:
+        for raw in f:
+            name = raw.strip()
+            if not name or name.startswith("#"):
+                continue
+            if name.endswith(",#genre#"):
+                current = name[:-len(",#genre#")]
+                extra.setdefault(current, [])
+            elif current:
+                extra[current].append(name)
+
+    if not extra:
+        return lines
+
+    blocks = []
+    for line in lines:
+        if line.endswith(",#genre#"):
+            blocks.append([line[:-len(",#genre#")], []])
+        else:
+            blocks[-1][1].append(line)
+    index = {cat: i for i, (cat, _) in enumerate(blocks)}
+
+    for cat, names in extra.items():
+        if cat not in index:
+            blocks.append([cat, []])
+            index[cat] = len(blocks) - 1
+        existing = set(blocks[index[cat]][1])
+        for name in names:
+            if name not in existing:
+                blocks[index[cat]][1].append(name)
+                existing.add(name)
+
+    merged = []
+    for cat, names in blocks:
+        merged.append(f"{cat},#genre#")
+        merged.extend(sorted(names, key=natural_key))
+    return merged
 
 
 def main():
@@ -290,7 +386,7 @@ def main():
     for cat in ORDER:
         if cat in bucket and bucket[cat]:
             names = bucket[cat]
-            keep = [n for n in names if taihao_count.get(normalize_taihao(n), 0) >= 2]
+            keep = [n for n in names if taihao_count.get(normalize_taihao(n), 0) >= 2 or is_local_name(n)]
             dropped_cold += len(names) - len(keep)
             if keep:
                 lines.append(f"{cat},#genre#")
@@ -300,12 +396,14 @@ def main():
     for cat in bucket:
         if cat not in ORDER and bucket[cat]:
             names = bucket[cat]
-            keep = [n for n in names if taihao_count.get(normalize_taihao(n), 0) >= 2]
+            keep = [n for n in names if taihao_count.get(normalize_taihao(n), 0) >= 2 or is_local_name(n)]
             if keep:
                 lines.append(f"{cat},#genre#")
                 for n in sorted(keep, key=natural_key):
                     lines.append(n)
                     count += 1
+
+    lines = merge_extra_channels(lines)
 
     with open(OUT, "w", encoding="utf-8", newline="\n") as f:
         f.write("\n".join(lines) + "\n")

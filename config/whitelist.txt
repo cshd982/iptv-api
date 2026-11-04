@@ -7,7 +7,20 @@
 
 
 
-
+# 山东地方台：以下接口为山东省内运营商/区域 CDN，省内网络可正常播放，
+# 但 GitHub Actions 等海外出口不可达。加入白名单可跳过测速并保留到 CI 产物，
+# 由使用者在本省网络中播放。
+山东齐鲁,http://223.99.189.25:8089/shandong_cabletv.live.zte.com/223.99.253.7:8081/00/SNM/CHANNEL00000313/index.m3u8
+山东综艺,http://223.99.189.25:8089/shandong_cabletv.live.zte.com/223.99.253.7:8081/00/SNM/CHANNEL00000338/index.m3u8
+山东影视频道,http://223.99.189.25:8089/shandong_cabletv.live.zte.com/223.99.253.7:8081/00/SNM/CHANNEL00000337/index.m3u8
+山东体育休闲频道,http://223.99.189.25:8089/shandong_cabletv.live.zte.com/223.99.253.7:8081/00/SNM/CHANNEL00000315/index.m3u8
+山东农科,http://223.99.189.25:8089/shandong_cabletv.live.zte.com/223.99.253.7:8081/00/SNM/CHANNEL00000339/index.m3u8
+山东新闻,http://223.99.189.25:8089/shandong_cabletv.live.zte.com/223.99.253.7:8081/00/SNM/CHANNEL00000314/index.m3u8
+济南新闻综合,http://ucdn.sd.chinamobile.com:8089/00/SNM/CHANNEL00000061/index.m3u8
+# 湖北/黑龙江地方台：公网可达但码率较低，加入白名单避免被 min_speed 过滤掉
+荆门新闻综合,http://stream.jmtv.com.cn/xwzh/sd/live.m3u8
+哈尔滨新闻综合,http://stream.hrbtv.net/xwzh/sd/live.m3u8
+七台河新闻综合,http://live.qthnews.org.cn:1935/live/live1/800k/tzwj_video.m3u8
 
 
 [KEYWORDS]
